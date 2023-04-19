@@ -21,18 +21,12 @@ exports.handler = async (event) => {
     const timestamp = event.events[0].timestamp;
     const replyToken = event.events[0].replyToken;
 
-    // DynamoDBから直近5回の会話を取得
-    const pastMessages = await getMessageHistory(userId);
-    console.log('pastMessages:', pastMessages);
-
     const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
-        temperature: 0.5, // 生成テキストの多様性
-        maxTokens: 2048, // 生成テキストの長さ
+        temperature: 0.3, // 生成テキストの多様性
         messages: [
             { role: 'system', content: personality },
-            ...pastMessages,
-            { role: 'user', content: message },
+            { role: 'user', content: `${message}教えて✨😆` },
         ],
     });
 
