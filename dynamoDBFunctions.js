@@ -12,7 +12,7 @@ const dayjs = require('dayjs');
 exports.putMessageHistory = async (userId, timestamp, message, replyMessage) => {
     const now = dayjs().format('YYYYMMDDHHmmss');
     const params = {
-        TableName: 'baby_chat_history',
+        TableName: 'itgirl_chat_history',
         Item: {
             user_id: { S: userId },
             timestamp: { N: timestamp.toString() },
@@ -38,7 +38,7 @@ exports.putMessageHistory = async (userId, timestamp, message, replyMessage) => 
  */
 exports.getMessageHistory = async (userId) => {
     const params = {
-        TableName: 'baby_chat_history',
+        TableName: 'itgirl_chat_history',
         KeyConditionExpression: 'user_id = :user_id',
         ExpressionAttributeValues: {
             ':user_id': { S: userId },
